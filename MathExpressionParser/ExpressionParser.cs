@@ -7,10 +7,11 @@ namespace MathExpressionParser
 {
     static class ExpressionParser
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Console.WriteLine("Podaj wzór: ");
             Calculate(Console.ReadLine());
+            Console.ReadKey();
         }
 
         private static void Calculate(string expression)
@@ -55,19 +56,22 @@ namespace MathExpressionParser
 
             foreach (var character in expressionCharacters)
             {
+                if(charactersValues.ContainsKey(character.ToString()))
+                    continue;
+
                 var shouldRepeat = true;
 
                 while(shouldRepeat)
                 {
                     Console.Write($"Podaj {character}: ");
 
-                if(double.TryParse(Console.ReadLine(), out double result))
-                {
-                    charactersValues.Add(character.ToString(), result);
-                    shouldRepeat = false;
-                }
-                else
-                    Console.WriteLine("Nieprawidłowe dane wejściowe");
+                    if(double.TryParse(Console.ReadLine(), out double result))
+                    {
+                        charactersValues.Add(character.ToString(), result);
+                        shouldRepeat = false;
+                    }
+                    else
+                        Console.WriteLine("Nieprawidłowe dane wejściowe");
                 }
             }
 
