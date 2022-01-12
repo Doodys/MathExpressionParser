@@ -9,9 +9,25 @@ namespace MathExpressionParser
     {
         static void Main()
         {
-            Console.WriteLine("Podaj wzór: ");
+            var expression = string.Empty;
+
+            while(true)
+            {
+                Console.WriteLine("Podaj wzór: ");
+                expression = Console.ReadLine();
+
+                if(string.IsNullOrEmpty(expression))
+                {
+                    Console.Clear();
+                    Console.WriteLine("Pusta dana wejściowa. Wprowadź raz jeszcze.");
+                }
+                else
+                    break;
+            }
+            
             // wykonaj funkcję Calculate wymaganą w zadaniu
-            Calculate(Console.ReadLine());
+            Calculate(expression);
+
             // nie wyłączaj okna konsoli od razu po obliczeniach
             Console.ReadKey();
         }
